@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>T-Rex Runner</title>
+    <meta name="author" content="Danial Dezfouli" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/app.css" />
+    <script src="app/utils.js"></script>
+    <script src="app/Obstacle.js"></script>
+    <script src="app/Hero.js"></script>
+    <script src="app/Globe.js"></script>
+    <script src="app/GameUI.js"></script>
+    <script src="app/Game.js"></script>
+    <script src="app/main.js" defer></script>
+  </head>
+  <body class="debugging">
+    <div id="app" class="day">
+      <div class="indicators-top-left">
+        <div class="life-indicator">
+          <span class="label">Life:</span>
+          <div class="value">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+        <div class="score">
+          <div class="label">Score:</div>
+          <div class="value">0</div>
+        </div>
+      </div>
+      <div class="bg overlay">
+        <div class="day overlay"></div>
+        <div class="night overlay"></div>
+        <div class="sun"></div>
+        <div class="moon">
+          <span class="overlay"></span>
+        </div>
+      </div>
+      <div class="wrapper overlay">
+        <div class="globe">
+          <div class="hero"></div>
+          <div class="globe-shape overlay"></div>
+          <div class="particles overlay"></div>
+          <div class="obstacles overlay"></div>
+        </div>
+      </div>
+
+      <div class="modal start">
+        <div class="content">
+          <h2 class="subtitle">Press SPACE to Start the Game</h2>
+        </div>
+      </div>
+
+      <div class="modal game-over hidden">
+        <div class="content">
+          <h1 class="title">Game Over</h1>
+          <h2 class="subtitle">Press ENTER to Start Again</h2>
+          <p class="score">Your score: <span>0</span></p>
+          <p class="score best">Your Best: <span>0</span></p>
+          <div><button class="restart">Start Again</button></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

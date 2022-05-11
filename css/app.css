@@ -1,0 +1,465 @@
+:root {
+  --theme-transition: 0.3s;
+  --border-radius: 3rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Bubblegum Sans", cursive;
+  background: #e5effc;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  overflow: hidden;
+  user-select: none;
+}
+
+.overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.indicators-top-left {
+  position: absolute;
+  left: 50px;
+  top: 50px;
+  z-index: 2;
+  font-size: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.indicators-top-left > div {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.indicators-top-left .label {
+}
+
+.life-indicator .value {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 3px;
+  width: 34px;
+  height: 12px;
+  background: #222;
+  border-radius: 2px;
+  padding: 3px;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.life-indicator .value span {
+  background: #444;
+}
+
+.life-indicator .value span.en {
+  background: #ff1b1b;
+}
+
+#app {
+  position: relative;
+  width: 720px;
+  height: 480px;
+  background: #fff;
+  box-shadow: 0 30px 30px -10px rgba(44, 59, 94, 0.1),
+    0 -1px rgba(57, 57, 61, 0.06);
+  border-radius: var(--border-radius);
+}
+
+#app > .wrapper {
+  overflow: hidden;
+  top: auto;
+  height: 320px;
+  border-radius: 0 0 var(--border-radius) var(--border-radius);
+}
+
+.bg > div {
+  border-radius: var(--border-radius);
+  transition: var(--theme-transition) opacity ease-out;
+}
+
+.bg .day {
+  background: linear-gradient(to bottom left, #62bfff, #a8dbff);
+}
+
+.bg .night {
+  opacity: 0;
+  background: linear-gradient(to bottom left, #383c86, #ac6da0);
+}
+
+#app.night .bg .night,
+#app.day .bg .day {
+  opacity: 1;
+}
+
+.bg .moon,
+.bg .sun {
+  position: absolute;
+  border-radius: 100%;
+  opacity: 0;
+  transition: var(--theme-transition) ease-out;
+}
+
+.bg .sun {
+  right: 60px;
+  top: 60px;
+  width: 60px;
+  height: 60px;
+  background: rgb(255, 231, 0);
+  box-shadow: 0 0 0 12px rgba(255, 231, 0, 0.1),
+    0 0 0 25px rgba(255, 231, 0, 0.1), 0 0 50px rgba(255, 231, 0, 0.8);
+  transform: translate(50px, -50px);
+}
+
+.bg .moon {
+  right: 60px;
+  top: 60px;
+  width: 50px;
+  height: 50px;
+  background: #fff;
+  box-shadow: 0 0 50px #f2f0f5;
+  transform: translate(30px, -30px);
+}
+
+#app.day .bg .sun,
+#app.night .bg .moon {
+  transform: none;
+  opacity: 1;
+}
+
+.hero {
+  position: absolute;
+  left: 50%;
+  --scale: 1;
+  --y: 1px;
+  transform: translateX(-50%) translateY(var(--y)) scale(var(--scale));
+  bottom: 100%;
+  width: 44px;
+  height: 50px;
+  z-index: 2;
+  transition: 0.2s transform ease-out;
+  background-image: url("../assets/sprite.png");
+  animation: run 0.4s infinite steps(2);
+}
+
+@keyframes run {
+  0% {
+    background-position: 297px top;
+  }
+  100% {
+    background-position: 253px top;
+    background-position: 209px top;
+  }
+}
+
+.hero.hit {
+  --scale: 0.9;
+  /* background: red; */
+}
+
+.hero.heal {
+  --scale: 1.1;
+  /* background: #85d271; */
+}
+
+.hero.jump {
+  --y: -60px;
+  /* width: 28px; */
+}
+
+.hero.jump2 {
+  --y: -90px;
+  /* width: 26px; */
+}
+
+.hero.sit {
+  width: 58px;
+  height: 30px;
+  animation-name: sit;
+}
+
+@keyframes sit {
+  0% {
+    background-position: 121px center;
+  }
+  100% {
+    background-position: 3px center;
+  }
+}
+
+.distance {
+  position: absolute;
+  left: 50px;
+  top: 50px;
+}
+.globe {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, 0);
+  /* transform: translate(-50%, -50%); */
+  width: 620px;
+  height: 620px;
+}
+
+.globe .globe-shape {
+  border-radius: 100%;
+  background: #85d271;
+  box-shadow: 0 -10px 10px -10px rgba(7, 11, 27, 0.15);
+  transition: var(--theme-transition) background ease-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 80px;
+  z-index: 2;
+}
+
+.particles {
+  position: absolute;
+  top: 0;
+  z-index: -1;
+}
+
+.particles .particle {
+  position: absolute;
+  top: 0;
+  height: 80px;
+  width: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  perspective: 100px;
+}
+
+.particles span {
+  --rotateX: 90deg;
+  position: relative;
+  display: block;
+  transform-style: preserve-3d;
+  transform-origin: bottom;
+  transform: rotateX(var(--rotateX)) translate3d(0px, 0px, 0px);
+}
+
+.particles .tree span {
+  height: 40px;
+}
+
+.particles .tree span::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to top, rgba(22, 42, 81, 0.1), transparent);
+  background: #4d4e4d;
+  border-radius: 100px 100px 0 0;
+  transform: translate3d(0, 0, -1px);
+  z-index: -9;
+}
+
+.particles .tree i {
+  --x: 0px;
+  --y: 0px;
+  --size: 40px;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  height: var(--size);
+  width: var(--size);
+  border-radius: 100%;
+  background: #0d8c0d;
+  transform: rotateX(90deg) translateX(-50%) translate3d(var(--x), var(--y), 20px);
+  z-index: 9;
+  display: block;
+}
+
+.particles .tree i:nth-child(2) {
+  background: #0ea30e;
+}
+
+.particles .tree i:nth-child(3) {
+  background: #118911;
+}
+
+.particles .mountain span {
+  display: block;
+}
+.particles .mountain span::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(76, 85, 87, 0.4);
+  border-radius: 70% 0 0 0;
+  transform: rotate(45deg) translate(35%, 35%);
+}
+
+.night .globe .globe-shape {
+  background: #3d3a68;
+}
+
+.obstacles {
+}
+
+.obstacle {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  text-align: center;
+  width: 30px;
+  height: 30px;
+  font-size: 1.25rem;
+}
+
+.obstacle.double {
+  width: 50px;
+  height: 50px;
+}
+
+.obstacle div {
+  max-width: 100%;
+  max-height: 100%;
+}
+.debugging .obstacle div {
+  /* background: black; */
+}
+
+.obstacle span {
+  position: relative;
+  display: block;
+  z-index: 2;
+}
+
+.obstacle.ground span {
+  transform: translateY(2px);
+}
+/* 
+.obstacle.ground::before {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 15px;
+  height: 3px;
+  background: #000;
+  border-radius: 10px;
+  z-index: -1;
+} */
+
+.obstacle.rocket span {
+  transform: scaleX(-1) rotate(40deg);
+}
+
+.obstacle.rocket.double span {
+  transform: scaleX(-1) rotate(40deg) translateY(-5px);
+}
+
+.obstacle.meteorite span {
+  transform: rotate(40deg);
+}
+
+.obstacle.fadeout div {
+  transform: scale(0.5);
+  opacity: 0;
+  transition: 0.2s;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(44, 46, 59, 0.36);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.modal h1 {
+  font-size: 2.25rem;
+}
+
+.modal h2 {
+  font-size: 1.375rem;
+}
+
+.modal h3 {
+  font-size: 1rem;
+  margin: 0;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal .content {
+  border-radius: 20px;
+  border: 3px solid #fff;
+  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.4);
+  padding: 1rem 2rem;
+  background: rgb(24 25 26 / 75%);
+  text-align: center;
+  backdrop-filter: blur(12px);
+}
+
+.modal.game-over .content {
+  border: 3px solid #d46700;
+}
+
+.modal.game-over.success .content {
+  border: 3px solid #09c447;
+}
+
+.modal a,
+.modal button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  color: #fff;
+  display: inline-block;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: 0.2s;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+.share-twitter {
+  background: #1da1f2;
+  text-decoration: none;
+  margin: 0.5rem 0 1rem 0;
+}
+
+.share-twitter:focus {
+  box-shadow: 0 0 0 4px rgba(7, 160, 255, 0.5);
+}
+
+button.restart {
+  border: none;
+  background: #fff;
+  color: #000;
+  font-weight: bold;
+}
+
+button.restart:focus {
+  box-shadow: 0 0 0 4px rgba(7, 160, 255, 0.5);
+}
