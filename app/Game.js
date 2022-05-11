@@ -55,7 +55,7 @@ class Game {
     this.nextLevelUpdate = 0;
     this.nextThemeChange = 0;
     this.obstacles = [];
-    
+
     this.ui.hideStart();
 
     this.setTtheme("day");
@@ -181,6 +181,7 @@ class Game {
     } else {
       this.setTtheme("day");
     }
+    this.nextThemeChange = Date.now() + 2000;
   }
 
   update() {
